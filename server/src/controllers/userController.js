@@ -38,7 +38,8 @@ const login = async (req, res) => {
     const refreshToken = await JwtProvider.generateToken(
       userInfo,
       secretSignatureRefreshToken,
-      "14 days"
+      // "14 days"
+      "15s"
     );
 
     res.cookie("accessToken", accessToken, {

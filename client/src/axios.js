@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { handleLogoutAPI, refreshTokenAPI } from './apis'
+import { navigateTo } from './utils/navigation'
 
 let authorizedAxiosInstance = axios.create()
 // Thời gian chờ tối đa của 1 request
@@ -34,7 +35,7 @@ authorizedAxiosInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       handleLogoutAPI().then(() => {
-        location.href = '/login'
+        navigateTo('/login')
       })
     }
     const originalRequest = error.config
@@ -52,7 +53,7 @@ authorizedAxiosInstance.interceptors.response.use(
           })
           .catch((_error) => {
             handleLogoutAPI().then(() => {
-              location.href = '/login'
+              navigateTo('/login')
             })
             return Promise.reject(_error)
           })

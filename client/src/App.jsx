@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import Login from '~/pages/Login'
 import Dashboard from '~/pages/Dashboard'
+import useNavigateSetter from './hooks/useNavigateSetter'
 
 const ProtectedRoute = () => {
   const user = localStorage.getItem('userInfo')
@@ -19,6 +20,7 @@ const UnAuthorizedRoute = () => {
 }
 
 function App() {
+  useNavigateSetter()
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace={true} />} />
